@@ -19,6 +19,9 @@ Sinal::Sinal(double* sequencia, int comprimento){
 
 Sinal::Sinal(double constante, int comprimento) {
     this->comprimento=comprimento;
+    if(comprimento<=0) {
+        throw new invalid_argument("Comprimento Inválido");
+    }
     this->constante=constante;
     int i=0;
     guardaConstante= new double[comprimento];
