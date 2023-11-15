@@ -13,6 +13,7 @@ private:
     string NomeDoSinal;
     double *guardaSequencia;
     double *guardaConstante;
+    int tamanho;
 
 public:
     Sinal(int constante, double comprimento);
