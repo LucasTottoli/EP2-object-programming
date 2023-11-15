@@ -1,10 +1,13 @@
 #include "Sinal.h"
 #include "Grafico.h"
+#include <stdexcept>
 using namespace std;
 
 Sinal::Sinal(double* sequencia, int comprimento){
-    
     this->comprimento = comprimento;
+    if(comprimento<=0) {
+        throw new invalid_argument("Comprimento Inválido");
+    }
     guardaSequencia = new double[comprimento];
 
     for(int i = 0; i < comprimento; i++){
@@ -12,7 +15,7 @@ Sinal::Sinal(double* sequencia, int comprimento){
     }
     this->sequencia = guardaSequencia;
 
-}
+};
 
 Sinal::Sinal(double constante, int comprimento) {
     this->comprimento=comprimento;
@@ -23,26 +26,27 @@ Sinal::Sinal(double constante, int comprimento) {
         guardaConstante[i]=constante;
     }
     this->sequencia=guardaConstante;
-}
+};
 
 Sinal::~Sinal() {
     delete[] guardaSequencia;
     delete[] guardaConstante;
-}
+};
 
 int Sinal::getComprimento() {
     return comprimento;
-}
+};
+
  double *Sinal::getSequencia() {
     return sequencia;
- }
+ };
 
  void Sinal::imprimir(string nomeDoSinal) {
     this->nomeDoSinal = nomeDoSinal;
 
     Grafico* G = new Grafico(nomeDoSinal, sequencia, comprimento);
     G->plot();
- }
+ };
 
 void Sinal::imprimirTestes() {
     int i;
@@ -50,7 +54,7 @@ void Sinal::imprimirTestes() {
         cout<<i<<"-"<<" "<<sequencia[i]<<endl;
     }
     cout<<"--"<<endl;
-}
+};
 
 void Sinal::imprimir(int tamanho) {
     int i;
@@ -71,4 +75,4 @@ void Sinal::imprimir(int tamanho) {
 
 
 
-}
+};
