@@ -22,5 +22,5 @@ int Circuito::getUltimoID() {
 }
 
 void Circuito::imprimir() {
-    cout<<"Circuito com ID"<<" "<<"["<<UltimoID<<"]"<<endl; 
+    cout<<"Circuito com ID"<<" "<<"["<<ID<<"]"<<endl; 
 }
