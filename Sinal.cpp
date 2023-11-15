@@ -1,69 +1,60 @@
 #include "Sinal.h"
 #include "Grafico.h"
 #include <stdexcept>
-using namespace std;
-
 Sinal::Sinal(double* sequencia, int comprimento){
+    
     this->comprimento = comprimento;
     if(comprimento<=0) {
-        throw new invalid_argument("Comprimento Inválido");
+        throw new invalid_argument("Comprimento inválido");
     }
-    guardaSequencia = new double[comprimento];
+    guardasequencia = new double[comprimento];
 
     for(int i = 0; i < comprimento; i++){
-        guardaSequencia[i] = sequencia[i];
+        guardasequencia[i] = sequencia[i];
     }
-    this->sequencia = guardaSequencia;
+    this->sequencia = guardasequencia;
+}
 
-};
+
+double* Sinal::getSequencia(){
+    return sequencia;
+}
+
+int Sinal::getComprimento(){
+    return comprimento;
+}
 
 Sinal::Sinal(double constante, int comprimento) {
+    this->constante=constante;
+    int i;
     this->comprimento=comprimento;
     if(comprimento<=0) {
-        throw new invalid_argument("Comprimento Inválido");
-    }
-    this->constante=constante;
-    int i=0;
-    guardaConstante= new double[comprimento];
-    for(i=0;i<comprimento;i++) {
-        guardaConstante[i]=constante;
-    }
-    this->sequencia=guardaConstante;
-};
+        throw new invalid_argument("Comprimento inválido");
+}
+Constante = new double[comprimento];
+for(i=0;i<comprimento;i++) {
+    Constante[i]=constante;
+}
+this->sequencia=Constante;
+}
 
-Sinal::~Sinal() {
-    delete[] guardaSequencia;
-    delete[] guardaConstante;
-};
-
-int Sinal::getComprimento() {
-    return comprimento;
-};
-
- double *Sinal::getSequencia() {
-    return sequencia;
- };
-
- void Sinal::imprimir(string nomeDoSinal) {
+void Sinal::imprimir(string nomeDoSinal){
     this->nomeDoSinal = nomeDoSinal;
 
     Grafico* G = new Grafico(nomeDoSinal, sequencia, comprimento);
     G->plot();
- };
+}
 
-void Sinal::imprimirTestes() {
-    int i;
-    for(i=0;i<comprimento;i++) {
-        cout<<i<<"-"<<" "<<sequencia[i]<<endl;
-    }
-    cout<<"--"<<endl;
-};
+Sinal::~Sinal(){
+   delete[] guardasequencia;
+   delete[] Constante;
+}
 
-void Sinal::imprimir(int tamanho) {
+void Sinal::imprimir(int comprimento) {
     int i;
     this->tamanho=tamanho;
     if(comprimento<tamanho) {
-        for(i=0;i<comprimento;i++) {
+        for(i=0;i<comprimento-1;i++) {
         cout<<i<<"-"<<" "<<sequencia[i]<<endl;
     }
         cout<<"--"<<endl;
@@ -76,6 +67,12 @@ void Sinal::imprimir(int tamanho) {
         cout<<"--"<<endl;
     }
 
+}
 
-
-};
+void Sinal::imprimirTestes() {
+    int i;
+    for(i=0;i<comprimento;i++) {
+        cout<<i<<"-"<<" "<<sequencia[i]<<endl;
+    }
+    cout<<"--"<<endl;
+}
