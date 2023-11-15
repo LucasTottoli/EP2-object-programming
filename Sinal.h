@@ -19,7 +19,7 @@ public:
     ~Sinal();
     double *getSequencia();
     int getComprimento();
-    void imprimir(string NomeDoSinal)
+    void imprimir(string NomeDoSinal);
     void imprimirTESTE();
     void imprimir(int tamanho);
 
