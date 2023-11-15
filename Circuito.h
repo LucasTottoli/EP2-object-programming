@@ -2,10 +2,16 @@
 #define CIRCUITO_H
 
 class Circuito {
-private:
-    
-public:
+protected:
+    int ID=0;
+    static int UltimoID;
 
+public:
+    Circuito();
+    virtual ~Circuito()=0;
+    int getID();
+    void imprimir();
+    static int getUltimoID();
 };
 
 #endif
