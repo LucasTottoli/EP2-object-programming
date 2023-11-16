@@ -8,12 +8,12 @@ using namespace std;
 class Sinal{
 private:
     string nomeDoSinal;
+    int comprimento;
+    int tamanho;
     double* sequencia;
     double* guardasequencia;
-    int comprimento;
-    int constante;
-    int tamanho;
-    double *Constante;
+    double *Const;
+    double constante;
 
 
 public:
@@ -24,7 +24,7 @@ public:
     int getComprimento();
     void imprimir(string nomeDoSinal);
     void imprimir(int tamanho);
-    void imprimirTestes();
+    void imprimir(); //para testes
 };
 
 #endif
