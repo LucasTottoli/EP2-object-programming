@@ -1,10 +1,16 @@
 #ifndef CIRCUITOSISO_H
 #define CIRCUITOSISO_H
 
-class CircuitoSISO {
-private:
+#include "Circuito.h"
+#include "Sinal.h"
+
+class CircuitoSISO : public Circuito {
+protected:
     
 public:
+    CircuitoSISO();
+    virtual ~CircuitoSISO();
+    virtual Sinal* processar(Sinal* sinalIN) = 0;
 
 };
 

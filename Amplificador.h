@@ -2,8 +2,9 @@
 #define AMPLIFICADOR_H
 
 #include "Sinal.h"
+#include "CircuitoSISO.h"
 
-class Amplificador{
+class Amplificador : public CircuitoSISO{
 private:
     double ganho;
 

@@ -3,12 +3,12 @@
 
 class Circuito {
 protected:
-    int ID=0;
+    int ID = 0;
     static int UltimoID;
 
 public:
     Circuito();
-    virtual ~Circuito()=0;
+    virtual ~Circuito();
     int getID();
     void imprimir();
     static int getUltimoID();

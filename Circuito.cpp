@@ -6,7 +6,7 @@ int Circuito::UltimoID=0;
 
 Circuito::Circuito() {
     UltimoID++;
-    ID=UltimoID;
+    ID = UltimoID;
 }
 
 Circuito::~Circuito() {
