@@ -3,7 +3,7 @@
 
 #include "Sinal.h"
 
-class Integrador{
+class Integrador : public CircuitoSISO{
 public:
     Integrador();
     virtual ~Integrador();
