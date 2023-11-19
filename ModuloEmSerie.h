@@ -1,11 +1,15 @@
 #ifndef MODULOEMSERIE_H
 #define	MODULOEMSERIE_H
+#include "Modulo.h"
 
-class Modulo{
-private:
-    
+
+class ModuloEmSerie : public Modulo{
+protected:
 
 public:
+    ModuloEmSerie();
+    virtual ~ModuloEmSerie();
+    virtual Sinal* processar(Sinal* sinalIN); //redefiniu o método que é abstrato na superClasse, logo, é uma classe concreta
 };
 
 #endif
