@@ -14,10 +14,14 @@ void Modulo::adicionar(CircuitoSISO* circ){
     this->circ = circ; 
     Circuitos->push_front(circ); //adiciona na frente da lista o circuito dado
 }
+
 void Modulo::imprimir(){
+    list<CircuitoSISO*>::iterator i = Circuitos->begin(); //cria-se um iterador para percorrer a lista
+
     cout << "Modulo com ID [" << ID << "] e:" << endl;
-    for(int i = 0; i < Circuitos->size(); i++){
-        cout << "Circuito com ID [" << circ->getID() << "]" << endl;
+    while(i != Circuitos->end()){
+        cout << "Circuito com ID [" << (*i)->getID() << "]" << endl; //percorre a lista do primeiro elemento até o último
+        i++;
     }
 }
 

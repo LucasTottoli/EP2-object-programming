@@ -7,8 +7,8 @@ using namespace std;
 
 class Modulo : public CircuitoSISO{ //classe herda da classe abstrata
 protected:
-    list<CircuitoSISO*>* Circuitos = new list<CircuitoSISO*>();
     CircuitoSISO* circ;
+    list<CircuitoSISO*>* Circuitos = new list<CircuitoSISO*>();
 
 public:
     Modulo();

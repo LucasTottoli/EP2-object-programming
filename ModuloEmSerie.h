@@ -5,7 +5,7 @@
 
 class ModuloEmSerie : public Modulo{
 protected:
-
+    Sinal* sinalIN;
 public:
     ModuloEmSerie();
     virtual ~ModuloEmSerie();
