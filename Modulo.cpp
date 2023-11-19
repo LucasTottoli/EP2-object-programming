@@ -4,7 +4,7 @@
 using namespace std;
 
 Modulo::Modulo(){
-}
+} //o construtor não gerencia a existência da lista CircuitoSISO*
 
 list<CircuitoSISO*>* Modulo::getCircuitos(){
     return Circuitos; //retorna a lista de circuitos
@@ -26,10 +26,10 @@ void Modulo::imprimir(){
 }
 
 Modulo::~Modulo(){
-    while(!Circuitos->empty()){
-        CircuitoSISO* circ = Circuitos->front();
-        Circuitos->pop_front();
-        delete circ;
+    while(!Circuitos->empty()){ //verifica se a lista está vazia
+        CircuitoSISO* circ = Circuitos->front(); //variável circ recebe o elemento da frente da lista para que possa deleta-lo
+        Circuitos->pop_front(); //joga fora o elemento da frente da lista, mas não o deleta
+        delete circ; //deleta o elemento da frente da lista
     }
     
 }
