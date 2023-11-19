@@ -20,4 +20,3 @@ Sinal* Derivador::processar(Sinal* sinalIN){
 
 Derivador::~Derivador(){
 }
-

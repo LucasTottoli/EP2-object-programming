@@ -1,9 +1,10 @@
 #ifndef INTEGRADOR_H
 #define	INTEGRADOR_H
-#include "CircuitoSISO.h"
-#include "Sinal.h"
 
-class Integrador : public CircuitoSISO{
+#include "Sinal.h"
+#include "CircuitoSISO.h"
+
+class Integrador : public CircuitoSISO {
 public:
     Integrador();
     virtual ~Integrador();

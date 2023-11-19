@@ -2,11 +2,11 @@
 #include <iostream>
 using namespace std;
 
-int Circuito::UltimoID=0;
+int Circuito::UltimoID = 0; //atribui-se o valor inicial do atributo estático
 
 Circuito::Circuito() {
-    UltimoID++;
-    ID = UltimoID;
+    Circuito::UltimoID++;
+    ID = Circuito::UltimoID; //indica que é um atributo de escopo de classe
 }
 
 Circuito::~Circuito() {

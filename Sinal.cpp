@@ -17,6 +17,7 @@ Sinal::Sinal(double* sequencia, int comprimento){
         guardasequencia[i] = sequencia[i];
     }
     this->sequencia = guardasequencia;
+    this->constante = 0; //inicializou-se a constante também
 }
 
 
@@ -40,7 +41,7 @@ Sinal::Sinal(double constante, int comprimento) {
     for(int i = 0; i < comprimento; i++) {
         Const[i] = constante;
     }
-    this->sequencia = Const;
+    this->sequencia = Const; //inicializou-se a sequência também;
 }
 
 void Sinal::imprimir(string nomeDoSinal){

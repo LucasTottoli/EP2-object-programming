@@ -7,9 +7,9 @@ class CircuitoMISO : public Circuito {
 protected:
     
 public:
-    CircuitoMISO();
+    CircuitoMISO(); //construtor sem parâmetro, ou seja, os filhos não precisam inicializa-lo
     virtual ~CircuitoMISO();
-    virtual Sinal* processar(Sinal* sinalIN1, Sinal* sinalIN2) = 0;
+    virtual Sinal* processar(Sinal* sinalIN1, Sinal* sinalIN2) = 0; //torna a classe abstrata
 };
 
 #endif

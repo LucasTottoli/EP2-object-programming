@@ -17,14 +17,14 @@ private:
 
 
 public:
-    Sinal(double* sequencia, int comprimento);
-    Sinal(double constante, int comprimento);
+    Sinal(double* sequencia, int comprimento); //sobrecarga
+    Sinal(double constante, int comprimento); //sobrecarga
     virtual ~Sinal();
     double* getSequencia();
     int getComprimento();
-    void imprimir(string nomeDoSinal);
-    void imprimir(int tamanho);
-    void imprimir(); //para testes
+    void imprimir(string nomeDoSinal); //sobrecarga
+    void imprimir(int tamanho); //sobrecarga
+    void imprimir(); //sobrecarga
 };
 
 #endif
