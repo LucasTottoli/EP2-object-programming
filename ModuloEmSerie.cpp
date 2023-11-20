@@ -12,7 +12,7 @@ Sinal* ModuloEmSerie::processar(Sinal* sinalIN){
     this->sinalIN = sinalIN; //dá o valor do sinal de entrada para a variável protegida 
     
     if(Circuitos->empty()){
-        throw new logic_error("Erro"); //verifica se a lista está vazia
+        throw new logic_error("Erro no ModuloEmSerie, pois nao possui nenhum CircuitoSISO"); //verifica se a lista está vazia
     }
 
     list<CircuitoSISO*>::iterator i = Circuitos->begin(); //cria-se um iterador para percorrer a lista

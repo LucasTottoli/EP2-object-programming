@@ -1,9 +1,12 @@
 #include "ModuloRealimentado.h"
 #include "Somador.h"
-#include "Piloto.h"
+#include "ModuloEmSerie.h"
+#include "Amplificador.h"
 
-ModuloRealimentado::ModuloRealimentado(double ganho){
-    this->ganho = ganho;
+using namespace std;
+
+ModuloRealimentado::ModuloRealimentado(){
+    Modulos = new list<ModuloEmSerie*>();
 }
 
 Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
@@ -15,7 +18,7 @@ Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
 
     Amplificador* inversor = new Amplificador(-1);
     Somador* sum = new Somador();
-    Piloto* Pilot = new Piloto(ganho);
+    ModuloEmSerie* Pilot = new ModuloEmSerie();
 
     sequenciaSaidaInvertida[0] = 0;
     diferenca = new Sinal(sinalIN->getSequencia(), 1);
@@ -38,5 +41,19 @@ Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
     return saida;
 }
 
+list<ModuloEmSerie*>* ModuloRealimentado::getCircuitos(){
+    return Modulos;
+}
+
+void ModuloRealimentado::adicionar(ModuloEmSerie* circ){
+    this->circ = circ; 
+    Modulos->push_front(circ); //adiciona na frente da lista o circuito do modulo em serie dado
+}
+
 ModuloRealimentado::~ModuloRealimentado(){
+    while(!Modulos->empty()){ //verifica se a lista está vazia
+        ModuloEmSerie* circ = Modulos->front(); //variável circ recebe o elemento da frente da lista para que possa deleta-lo
+        Circuitos->pop_front(); //joga fora o elemento da frente da lista, mas não o deleta
+        delete circ; //deleta o elemento da frente da lista
+}
 }

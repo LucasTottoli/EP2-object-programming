@@ -2,6 +2,8 @@
 #define	MODULOEMSERIE_H
 #include "Modulo.h"
 
+using namespace std;
+
 
 class ModuloEmSerie : public Modulo{
 protected:
