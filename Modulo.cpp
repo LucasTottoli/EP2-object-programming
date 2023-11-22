@@ -12,7 +12,6 @@ list<CircuitoSISO*>* Modulo::getCircuitos(){
 }
 
 void Modulo::adicionar(CircuitoSISO* circ){
-    this->circ = circ; 
     Circuitos->push_back(circ); //adiciona atras da lista o circuito dado
 }
 

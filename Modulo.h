@@ -7,7 +7,6 @@ using namespace std;
 
 class Modulo : public CircuitoSISO{ //classe herda da classe abstrata
 protected:
-    CircuitoSISO* circ;
     list <CircuitoSISO*>* Circuitos;
 public:
     Modulo();
