@@ -6,7 +6,7 @@
 using namespace std;
 
 ModuloRealimentado::ModuloRealimentado(){
-    Modulos = new list<ModuloEmSerie*>();
+    Modulos = new list<CircuitoSISO*>();
 }
 
 Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
@@ -41,18 +41,18 @@ Sinal* ModuloRealimentado::processar(Sinal* sinalIN){
     return saida;
 }
 
-list<ModuloEmSerie*>* ModuloRealimentado::getCircuitos(){
+list<CircuitoSISO*>* ModuloRealimentado::getCircuitos(){
     return Modulos;
 }
 
-void ModuloRealimentado::adicionar(ModuloEmSerie* circ){
+void ModuloRealimentado::adicionar(CircuitoSISO* circ){
     this->circ = circ; 
-    Modulos->push_front(circ); //adiciona na frente da lista o circuito do modulo em serie dado
+    Modulos->push_back(circ); //adiciona na frente da lista o circuito do modulo em serie dado
 }
 
 ModuloRealimentado::~ModuloRealimentado(){
     while(!Modulos->empty()){ //verifica se a lista está vazia
-        ModuloEmSerie* circ = Modulos->front(); //variável circ recebe o elemento da frente da lista para que possa deleta-lo
+        CircuitoSISO* circ = Modulos->front(); //variável circ recebe o elemento da frente da lista para que possa deleta-lo
         Circuitos->pop_front(); //joga fora o elemento da frente da lista, mas não o deleta
         delete circ; //deleta o elemento da frente da lista
 }

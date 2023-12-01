@@ -20,9 +20,8 @@ PersistenciaDeModulo::PersistenciaDeModulo(string nomeDoArquivo)
 
 void PersistenciaDeModulo::RecursaoLeitura(ifstream &entrada, Modulo *mod)
 {
-    string leitura;
     double gain;
-
+    string leitura;
     entrada >> leitura;
 
     while (entrada)
@@ -85,19 +84,33 @@ void PersistenciaDeModulo::salvarEmArquivo(Modulo *mod)
 {
 
     ofstream output;
-    Integrador *I = new Integrador;
-
     output.open(nomeDoArquivo);
-
+    double gain;
     list<CircuitoSISO *>::iterator i = mod->getCircuitos()->begin();
 
     while (i != mod->getCircuitos()->end())
-    {
-        // if(mod->getCircuitos()->pop_back()  I){
+    {   
+            if(dynamic_cast<ModuloEmSerie*>(*i)!=NULL) {
+                output<<"S"<<endl;
+            }
+            else if(dynamic_cast<ModuloEmParalelo*>(*i)!=NULL){
+                output<<"P"<<endl;
+             }
+            else if(dynamic_cast<ModuloRealimentado*>(*i)!=NULL) {
+                output<<"R"<<endl;
+            }
 
-        // }
-        output << endl;
-        i++;
+            else if(dynamic_cast<Integrador*>(*i) !=NULL) {
+                output<<"I"<<endl;
+            }
+            else if( dynamic_cast<Derivador*>(*i)!=NULL) {
+                output<<"D"<<endl;
+            }
+            else if(dynamic_cast<Amplificador*>(*i)!=NULL){  
+                output<<"A"<<" "<<gain<<endl;
+            }
+            output<<"f"<<endl;
+            i++;
     }
 
     output.close();
@@ -117,6 +130,9 @@ Modulo *PersistenciaDeModulo::lerDeArquivo()
         throw new invalid_argument("Erro em Persistencia de Modulo, nao e' possivel abrir o arquivo");
     }
 
+    if(!entrada.eof()) { // Adicionei Depois!
+        throw new logic_error("Nao foi possivel ler todo o arquivo");
+    }
     RecursaoLeitura(entrada, mod);
 
     entrada.close();
