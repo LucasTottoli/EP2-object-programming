@@ -36,10 +36,9 @@ void ImprimirResultado(Sinal *SinalOUT) {
 }
 
 
-CircuitoSISO* nova_operacao(Sinal *sinalIN) {
+CircuitoSISO* nova_operacao() {
    int escolha;
    double gain;
-   Sinal* sinalOUT = new Sinal(sinalIN->getSequencia(), sinalIN->getComprimento());
    cout <<"Qual operacao voce gostaria de fazer?" << endl;
     cout << "1) Amplificar" << endl << "2) Derivar" << endl << "3) Integrar" << endl;
     cout << "Escolha: ";
@@ -47,59 +46,22 @@ CircuitoSISO* nova_operacao(Sinal *sinalIN) {
 
 
     if(escolha == 1){
-        int escolha1;
         cout << endl << "Qual o ganho dessa amplificacao?" << endl << "g = ";
         cin >> gain;
-
         Amplificador* Amplificator = new Amplificador(gain);
-        sinalOUT = Amplificator->processar(sinalIN);
-
-        cout << endl << "O que voce quer fazer agora?" << endl;
-        cout << "1) Realizar mais uma operacao no resultado" << endl << "2) Imprimir o resultado para terminar" << endl;
-        cout << "Escolha: ";
-        cin >> escolha1;
-        CircuitoSISO*novoCircuito2=new Amplificador(gain);
-        if(escolha1 == 1){
-            return nova_operacao(sinalOUT);
-        }
-
-        return novoCircuito2;
-
+        return Amplificator;
     }
 
      else if(escolha==2) {
-        int escolha2;
-        string nome;
         Derivador* Derivate= new Derivador();
-        sinalOUT=Derivate->processar(sinalIN);
-        cout << endl << "O que voce quer fazer agora?" << endl;
-        cout << "1) Realizar mais uma operacao no resultado" << endl << "2) Imprimir o resultado para terminar" << endl;
-        cout << "Escolha: ";
-        cin >> escolha2;
-
-        if(escolha2 == 1){
-            return nova_operacao(sinalOUT);
-        }
-        CircuitoSISO*novoCircuito=new Derivador();
-        return novoCircuito;
+        return Derivate;
     }
 
     else {
         Integrador*Integrate= new Integrador();
-        sinalOUT=Integrate->processar(sinalIN);
-        int escolha3;
-        cout << endl << "O que voce quer fazer agora?" << endl;
-        cout << "1) Realizar mais uma operacao no resultado" << endl << "2) Imprimir o resultado para terminar" << endl;
-        cout << "Escolha: ";
-        cin >> escolha3;
-
-        if(escolha3 == 1){
-            return nova_operacao(sinalOUT);
-        }
-        CircuitoSISO*novoCircuito=new Integrador();
-        return novoCircuito;
+        return Integrate;
     }
-    }
+}
 
 
 
@@ -167,6 +129,7 @@ void menu() {
     newModulo=new_Arquivo->lerDeArquivo();
     ImprimirResultado(SinalIN);
     SalvarArquivo(newModulo);
+    return;
    }
     SinalIN=novoSinal();
     cout<<"Quais estruturas de operacao voce deseja ter como base?"<<endl;
@@ -174,28 +137,30 @@ void menu() {
     cout<< "2) operacoes em paralelo nao realimentadas"<<endl;
     cout<<"3) operacoes em serie realimentadas"<<endl;
     cin>>escolha;
-    if(escolha==1) {
-        ModuloEmSerie* novoMod= new ModuloEmSerie();
-        novoMod->adicionar(nova_operacao(SinalIN));
-        ImprimirResultado(SinalIN);
-        SalvarArquivo(novoMod);
-    }
 
-        
+    Modulo*novoMod;
+    if(escolha==1) {
+        novoMod= new ModuloEmSerie();
+    }
     else if(escolha==2) {
-        ModuloEmParalelo* novoMod= new ModuloEmParalelo();
-        novoMod->adicionar(nova_operacao(SinalIN));
-        ImprimirResultado(SinalIN);
-        SalvarArquivo(novoMod);
+        novoMod= new ModuloEmParalelo();
     }
 
     else {
-        ModuloRealimentado*novoMod= new ModuloRealimentado();
-        novoMod->adicionar(nova_operacao(SinalIN));
-        ImprimirResultado(SinalIN);
-        SalvarArquivo(novoMod);
+        novoMod= new ModuloRealimentado();
+    }
 
-}
+    int escolha1;
+    do{
+        novoMod->adicionar(nova_operacao());
+        cout << endl << "O que voce quer fazer agora?" << endl;
+        cout << "1) Realizar mais uma operacao no resultado" << endl << "2) Imprimir o resultado para terminar" << endl;
+        cout << "Escolha: ";
+        cin >> escolha1;
+    } while(escolha1==1);
+    ImprimirResultado(novoMod->processar(SinalIN));
+    SalvarArquivo(novoMod);
+
 
  }
 

@@ -12,6 +12,38 @@
 
 using namespace std;
 
+void funcao(Modulo*Mod,ofstream &output) {
+     list<CircuitoSISO *>::iterator i=Mod->getCircuitos()->begin();
+    while(i!= Mod->getCircuitos()->end()) {   
+            if(dynamic_cast<ModuloEmSerie*>(*i)!=NULL) {
+                output<<"S"<<endl; 
+                funcao(dynamic_cast<ModuloEmSerie*>(*i),output);
+            }
+            else if(dynamic_cast<ModuloEmParalelo*>(*i)!=NULL){
+                output<<"P"<<endl;
+                funcao(dynamic_cast<ModuloEmParalelo*>(*i),output);
+             }
+            else if(dynamic_cast<ModuloRealimentado*>(*i)!=NULL) {
+                output<<"R"<<endl;
+                funcao(dynamic_cast<ModuloRealimentado*>(*i),output);
+            }
+
+            else if(dynamic_cast<Integrador*>(*i) !=NULL) {
+                output<<"I"<<endl;
+            }
+            else if( dynamic_cast<Derivador*>(*i)!=NULL) {
+                output<<"D"<<endl;
+            }
+            else if(dynamic_cast<Amplificador*>(*i)!=NULL){  
+
+                output<<"A"<<" "<<dynamic_cast<Amplificador*>(*i)->getGanho()<<endl;
+            }
+            i++;
+
+    }
+    output<<"f"<<endl;
+}
+
 PersistenciaDeModulo::PersistenciaDeModulo(string nomeDoArquivo)
 {
     this->nomeDoArquivo = nomeDoArquivo;
@@ -85,19 +117,29 @@ void PersistenciaDeModulo::salvarEmArquivo(Modulo *mod)
 
     ofstream output;
     output.open(nomeDoArquivo);
-    double gain;
     list<CircuitoSISO *>::iterator i = mod->getCircuitos()->begin();
-
+    if(dynamic_cast<ModuloEmSerie*>(mod)!=NULL) {
+        output<<"S"<<endl;
+    }
+    else if(dynamic_cast<ModuloEmParalelo*>(mod)!=NULL){
+        output<<"P"<<endl;
+    }
+    else if(dynamic_cast<ModuloRealimentado*>(mod)!=NULL) {
+        output<<"R"<<endl;
+    }
     while (i != mod->getCircuitos()->end())
     {   
             if(dynamic_cast<ModuloEmSerie*>(*i)!=NULL) {
                 output<<"S"<<endl;
+                funcao(dynamic_cast<ModuloEmSerie*>(*i),output);
             }
             else if(dynamic_cast<ModuloEmParalelo*>(*i)!=NULL){
                 output<<"P"<<endl;
+                funcao(dynamic_cast<ModuloEmParalelo*>(*i),output);
              }
             else if(dynamic_cast<ModuloRealimentado*>(*i)!=NULL) {
                 output<<"R"<<endl;
+                funcao(dynamic_cast<ModuloRealimentado*>(*i),output);
             }
 
             else if(dynamic_cast<Integrador*>(*i) !=NULL) {
@@ -107,11 +149,13 @@ void PersistenciaDeModulo::salvarEmArquivo(Modulo *mod)
                 output<<"D"<<endl;
             }
             else if(dynamic_cast<Amplificador*>(*i)!=NULL){  
-                output<<"A"<<" "<<gain<<endl;
+
+                output<<"A"<<" "<<dynamic_cast<Amplificador*>(*i)->getGanho()<<endl;
             }
-            output<<"f"<<endl;
             i++;
+
     }
+    output<<"f"<<endl;
 
     output.close();
 }
@@ -130,10 +174,10 @@ Modulo *PersistenciaDeModulo::lerDeArquivo()
         throw new invalid_argument("Erro em Persistencia de Modulo, nao e' possivel abrir o arquivo");
     }
 
-    if(!entrada.eof()) { // Adicionei Depois!
-        throw new logic_error("Nao foi possivel ler todo o arquivo");
-    }
     RecursaoLeitura(entrada, mod);
+    if(!entrada.eof()) { // Adicionei Depois!
+        //throw new invalid_argument("Nao foi possivel ler todo o arquivo");
+    }
 
     entrada.close();
 
