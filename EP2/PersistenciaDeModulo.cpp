@@ -176,7 +176,7 @@ Modulo *PersistenciaDeModulo::lerDeArquivo()
 
     RecursaoLeitura(entrada, mod);
     if(!entrada.eof()) { // Adicionei Depois!
-        //throw new invalid_argument("Nao foi possivel ler todo o arquivo");
+        throw new invalid_argument("Nao foi possivel ler todo o arquivo");
     }
 
     entrada.close();
